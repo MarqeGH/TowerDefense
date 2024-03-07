@@ -12,7 +12,6 @@ public class CoordinateSystem : MonoBehaviour
     void Awake()
     {
         label = GetComponent<TextMeshPro>();
-        SetCoordinates();
     }
 
     // Update is called once per frame
@@ -21,7 +20,11 @@ public class CoordinateSystem : MonoBehaviour
         if(!Application.isPlaying)
         {
             SetCoordinates();
-            SetTileNames();
+            // SetTileNames();
+        }
+        else
+        {
+            RemoveTileNames();
         }
     }
 
@@ -34,6 +37,10 @@ public class CoordinateSystem : MonoBehaviour
     {
         coordinates.x = Mathf.RoundToInt(transform.parent.position.x / (UnityEditor.EditorSnapSettings.move.x*2));
         coordinates.y = Mathf.RoundToInt(transform.parent.position.z / (UnityEditor.EditorSnapSettings.move.z*2));
-        label.text = coordinates.x + "," + coordinates.y;
+        label.SetText(coordinates.x + "," + coordinates.y);
+    }
+    void RemoveTileNames()
+    {
+        label.SetText("");
     }
 }
